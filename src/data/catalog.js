@@ -1,6 +1,14 @@
+import { existsSync } from 'node:fs';
+// Looks for public/images/<base>.webp (or jpg, jpeg, png, avif). Returns null if none, so a placeholder shows.
+const findImage = (base) => {
+  for (const ext of ['webp', 'jpg', 'jpeg', 'png', 'avif']) {
+    if (existsSync(`public/images/${base}.${ext}`)) return `/images/${base}.${ext}`;
+  }
+  return null;
+};
 export const site = {
   name: 'Dwarka Interiors',
-  url: 'https://dwarka-interiors-website.pages.dev', // change to your own domain later
+  url: 'https://dwarkainteriors.pages.dev', // change to your own domain later
   phone: '+918130713517',
   phoneDisplay: '+91 81307 13517',
   wa: '918130713517',
@@ -48,3 +56,6 @@ export const services = [
     points: ['Design sized to your exact wall', 'Your own image, theme or colours', 'Preview before printing', 'Installed with matched joins'],
     faq: ['Can I use my own image?', 'Usually, if the image has high enough resolution for the size of your wall. Share it with us and we will tell you how large it can print.'] },
 ];
+
+services.forEach((s) => { s.image = findImage('services/' + s.slug); });
+export const heroImage = findImage('hero');

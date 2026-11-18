@@ -44,3 +44,15 @@ footer{background:var(--ink);color:#d3dbe3;padding:40px 0 20px;margin-top:40px;f
 footer a{color:#fff}.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}.small{margin-top:16px;font-size:.85rem}
 .wa{position:fixed;right:16px;bottom:16px;z-index:20;box-shadow:0 4px 14px #0004}
 @media(max-width:720px){.nav .btn{display:none}}
+.herob{background:var(--ink) center/cover;color:#fff;padding:64px 0}
+.herob .lead{color:#d3dde8}.herob .btn.alt{border-color:#fff;color:#fff}.herob h1{max-width:12em}
+.herogrid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.herob .sw,.herob .sw-img{border-radius:10px}
+.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mosaic .sw{aspect-ratio:1}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.scard{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.scard .sw,.scard .sw-img{aspect-ratio:4/3;border-radius:0}
+.scard>div:not(.sw){padding:16px 18px 20px}.scard p{margin:0;color:var(--mut)}.scard:hover{border-color:var(--gold)}
+.sw span:empty{display:none}
+.band{background:var(--gold);color:var(--ink)}.band .btn{background:var(--ink);color:#fff}
+@media(max-width:800px){.herogrid{grid-template-columns:1fr}.herob{padding:40px 0}}

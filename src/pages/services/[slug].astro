@@ -13,12 +13,16 @@ const others = services.filter((o) => o.slug !== s.slug);
 ---
 <Base title={`${s.h1} | Dwarka Interiors`} description={`${s.intro.split('. ')[0]}. Dwarka Interiors, Bajaj Enclave, New Delhi. Message us for a quote.`} schema={schema}>
   <div class="wrap crumb"><a href="/">Home</a> / {s.name}</div>
-  <section class="wrap hero">
-    <h1>{s.h1}</h1>
-    <p class="lead">{s.intro}</p>
-    <div class="actions"><a class="btn" href={waLink(`Hello Dwarka Interiors, I would like to enquire about ${s.name.toLowerCase()}.`)}>Ask about {s.name.toLowerCase()}</a></div>
+  <section class="herob">
+    <div class="wrap herogrid">
+      <div>
+        <h1>{s.h1}</h1>
+        <p class="lead">{s.intro}</p>
+        <div class="actions"><a class="btn" href={waLink(`Hello Dwarka Interiors, I would like to enquire about ${s.name.toLowerCase()}.`)}>Ask about {s.name.toLowerCase()}</a></div>
+      </div>
+      <Photo src={s.image} slug={s.slug} alt={s.h1} label={`Photo: ${s.name} project`} />
+    </div>
   </section>
-  <section class="wrap big"><Photo slug={s.slug} alt={s.h1} label={`Photo: ${s.name} project`} /></section>
   <section class="wrap">
     <h2>What is included</h2>
     <ul class="tick">{s.points.map((p) => <li>{p}</li>)}</ul>
