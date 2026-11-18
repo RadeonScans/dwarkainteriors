@@ -1,0 +1,7 @@
+---
+// Pass src="/images/your-photo.webp" to show a real photo; without src a patterned placeholder appears.
+const { src, alt = '', slug = 'generic', label = 'Add photo' } = Astro.props;
+---
+{src
+  ? <img src={src} alt={alt} loading="lazy" class="sw-img" />
+  : <div class={`sw p-${slug}`} role="img" aria-label={alt || label}><span>{label}</span></div>}

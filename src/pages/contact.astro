@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, waLink } from '../data/catalog.js';
+const map = `https://www.google.com/maps?q=${encodeURIComponent(site.street + ', ' + site.city + ' ' + site.zip)}&output=embed`;
+---
+<Base title="Contact Dwarka Interiors | Bajaj Enclave, Old Palam Road, New Delhi" description="Visit Dwarka Interiors at Bajaj Enclave, Old Palam Road, New Delhi 110078, call +91 81307 13517 or message us on WhatsApp.">
+  <section class="wrap hero">
+    <h1>Contact Dwarka Interiors</h1>
+    <p class="lead">{site.street}, {site.city} {site.zip}</p>
+    <div class="actions"><a class="btn" href={waLink()}>Chat on WhatsApp</a><a class="btn alt" href={`tel:${site.phone}`}>Call {site.phoneDisplay}</a></div>
+  </section>
+  <section class="wrap"><iframe class="map" title="Dwarka Interiors on Google Maps" src={map} loading="lazy"></iframe></section>
+</Base>

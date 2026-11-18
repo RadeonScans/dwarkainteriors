@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import { site, services, waLink } from '../../data/catalog.js';
+export function getStaticPaths() { return services.map((s) => ({ params: { slug: s.slug }, props: { s } })); }
+const { s } = Astro.props;
+const [q, a] = s.faq;
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: s.h1, provider: { '@type': 'LocalBusiness', name: site.name, telephone: site.phone }, areaServed: 'Dwarka, New Delhi', description: s.intro },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }] },
+];
+const others = services.filter((o) => o.slug !== s.slug);
+---
+<Base title={`${s.h1} | Dwarka Interiors`} description={`${s.intro.split('. ')[0]}. Dwarka Interiors, Bajaj Enclave, New Delhi. Message us for a quote.`} schema={schema}>
+  <div class="wrap crumb"><a href="/">Home</a> / {s.name}</div>
+  <section class="wrap hero">
+    <h1>{s.h1}</h1>
+    <p class="lead">{s.intro}</p>
+    <div class="actions"><a class="btn" href={waLink(`Hello Dwarka Interiors, I would like to enquire about ${s.name.toLowerCase()}.`)}>Ask about {s.name.toLowerCase()}</a></div>
+  </section>
+  <section class="wrap big"><Photo slug={s.slug} alt={s.h1} label={`Photo: ${s.name} project`} /></section>
+  <section class="wrap">
+    <h2>What is included</h2>
+    <ul class="tick">{s.points.map((p) => <li>{p}</li>)}</ul>
+  </section>
+  <section class="wrap faq"><h2>{q}</h2><p>{a}</p></section>
+  <section class="wrap">
+    <h2>Other services</h2>
+    <p>{others.map((o, i) => <><a href={`/services/${o.slug}/`}>{o.name}</a>{i < others.length - 1 ? ', ' : ''}</>)}</p>
+  </section>
+</Base>

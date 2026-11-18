@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dwarka-interiors-website.pages.dev/sitemap.xml

@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import { site, services, waLink } from '../data/catalog.js';
+const { title, description, schema = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const business = {
+  '@context': 'https://schema.org', '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+  name: site.name, url: site.url, telephone: site.phone,
+  address: { '@type': 'PostalAddress', streetAddress: site.street, addressLocality: site.city, addressRegion: 'Delhi', postalCode: site.zip, addressCountry: 'IN' },
+  areaServed: ['Dwarka', 'Palam', 'Uttam Nagar', 'Janakpuri', 'Vikaspuri'],
+};
+---
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta name="theme-color" content="#12263a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet" />
+  {[business, ...schema].map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="/">Dwarka Interiors</a>
+    <nav>
+      <details>
+        <summary>Services</summary>
+        <div>{services.map((s) => <a href={`/services/${s.slug}/`}>{s.name}</a>)}</div>
+      </details>
+      <a href="/contact/">Contact</a>
+      <a class="btn" href={waLink()}>WhatsApp us</a>
+    </nav>
+  </div>
+</header>
+<main><slot /></main>
+<footer>
+  <div class="wrap cols">
+    <div><strong>Dwarka Interiors</strong><p>Wallpapers, PVC panels, false ceilings, blinds, curtains, flooring and artificial grass in Dwarka and across West Delhi.</p></div>
+    <div><strong>Services</strong><p>{services.map((s) => <><a href={`/services/${s.slug}/`}>{s.name}</a><br /></>)}</p></div>
+    <div><strong>Visit or call</strong><p>{site.street}, {site.city} {site.zip}<br /><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p></div>
+  </div>
+  <div class="wrap small">© {new Date().getFullYear()} Dwarka Interiors</div>
+</footer>
+<a class="btn wa" href={waLink()}>Chat on WhatsApp</a>
+</body>
+</html>

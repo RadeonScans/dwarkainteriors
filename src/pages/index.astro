@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import { services, waLink } from '../data/catalog.js';
+const faqs = [
+  ['Which areas do you serve?', 'We are based in Bajaj Enclave on Old Palam Road and work across Dwarka, Palam, Uttam Nagar, Janakpuri, Vikaspuri and nearby parts of West and South West Delhi.'],
+  ['Can I book just one wall or one room?', 'Yes. You can book one feature wall, one room or a combination, such as wallpaper with a false ceiling.'],
+  ['How do I get a quote?', 'Send photos and rough measurements on WhatsApp for a first idea. We confirm the final price after a site visit.'],
+];
+const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+---
+<Base title="Interior Decorators in Dwarka, Delhi | Wallpapers, PVC Panels, False Ceilings" description="Dwarka Interiors: wallpapers, PVC panels, false ceilings, blinds, curtains, flooring and artificial grass in Dwarka, New Delhi. Message us on WhatsApp for a quote." schema={[faqSchema]}>
+  <section class="wrap hero">
+    <h1>Interior decorators in Dwarka, Delhi</h1>
+    <p class="lead">Wallpapers, panels, ceilings, window treatments, floors and artificial grass, chosen with you and fitted properly.</p>
+    <div class="actions"><a class="btn" href={waLink()}>Get a quote on WhatsApp</a><a class="btn alt" href="/contact/">Visit our shop</a></div>
+  </section>
+  <section class="wrap">
+    <div class="swatches">
+      {services.map((s) => (
+        <a href={`/services/${s.slug}/`} class="swatch">
+          <Photo slug={s.slug} alt={s.h1} label={`Photo: ${s.name}`} />
+          <span>{s.name}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="wrap">
+    <h2>What we do</h2>
+    <div class="list">
+      {services.map((s) => <a href={`/services/${s.slug}/`}><h3>{s.name}</h3><p>{s.blurb}</p></a>)}
+    </div>
+  </section>
+  <section class="wrap">
+    <h2>How a job runs</h2>
+    <div class="steps">
+      <div><h3>Tell us the space</h3><p>Send photos and measurements, or visit the shop.</p></div>
+      <div><h3>Choose materials</h3><p>We show options that suit the room, light and budget.</p></div>
+      <div><h3>Site visit and price</h3><p>We measure on site and confirm the final price.</p></div>
+      <div><h3>Fitting</h3><p>Our team installs and cleans up.</p></div>
+    </div>
+  </section>
+  <section class="wrap faq">
+    <h2>Questions we hear often</h2>
+    {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+  </section>
+  <section class="wrap"><div class="band"><h2>Have a space in mind?</h2><p>Tell us what you want to change.</p><a class="btn" href={waLink()}>Chat on WhatsApp</a></div></section>
+</Base>
