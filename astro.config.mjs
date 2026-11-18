@@ -1,2 +1,2 @@
 import { defineConfig } from 'astro/config';
-export default defineConfig({ site: 'https://dwarka-interiors-website.pages.dev' });
+export default defineConfig({ site: 'https://dwarkainteriors.pages.dev' });
